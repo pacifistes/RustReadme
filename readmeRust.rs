@@ -8,6 +8,18 @@ cargo run		// Compile + Run
 cargo update	// update the version of all the crates (3.14 -> 3.16); If need go 4.0 change in Cargo.toml directly
 cargo new adder --lib // ADD to library
 cargo test // run test
+cargo fmt // formatte tous les fichier | install with : rustup component add rustfmt
+cargo clean  // clean all crate download
+*******************************************************************
+fn factorial(n: u32) -> u32 {
+    if dbg!(n <= 1) {
+        dbg!(1)
+    } else {
+        dbg!(n * factorial(n - 1))
+    }
+}
+
+dbg!(factorial(4));
 *******************************************************************
 
 use std::io;
@@ -439,3 +451,20 @@ mod tests {
         assert_eq!(2 + 2, 4);
     }
 }
+
+
+
+
+
+fn has_unique_elements<T>(iter: T) -> bool
+where
+    T: IntoIterator,
+    T::Item: Eq + Hash,
+{
+    let mut uniq = HashSet::new();
+    iter.into_iter().all(move |x| uniq.insert(x))
+}
+
+assert!(!has_unique_elements(vec![10, 20, 30, 10, 50]));
+assert!(has_unique_elements(vec![10, 20, 30, 40, 50]));
+assert!(has_unique_elements(Vec::<u8>::new()));
